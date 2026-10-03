@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GANZEL — Barbershop</title>
+<meta name="description" content="GANZEL BARBERSHOP — стрижки, борода и уход. Ежедневно с 10:00 до 20:00.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#10100f;
+    --surface:#181715;
+    --line:rgba(255,255,255,.12);
+    --text:#f2eee6;
+    --muted:#9b9890;
+    --accent:#c9a36a;
+    --accent-light:#e1c28f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+    min-width:320px;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"DM Sans",sans-serif;
+    line-height:1.5;
+}
+a{color:inherit;text-decoration:none}
+.container{width:min(1200px,calc(100% - 48px));margin:auto}
+
+/* Header */
+.header{
+    position:absolute;
+    z-index:10;
+    top:0;
+    width:100%;
+    padding:28px 0;
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{
+    font-family:"Manrope",sans-serif;
+    font-size:18px;
+    font-weight:800;
+    letter-spacing:.18em;
+}
+.nav{display:flex;gap:32px}
+.nav a{color:#aaa79f;font-size:13px;transition:.25s}
+.nav a:hover{color:var(--text)}
+.phone{font-size:13px;font-weight:600}
+.menu-button{
+    display:none;
+    border:0;
+    background:transparent;
+    color:var(--text);
+    font-size:25px;
+}
+
+/* Hero */
+.hero{
+    min-height:790px;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 78% 38%,rgba(201,163,106,.17),transparent 28%),
+        radial-gradient(circle at 20% 90%,rgba(255,255,255,.035),transparent 30%),
+        var(--bg);
+}
+.hero-inner{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:70px;
+    align-items:center;
+    padding-top:70px;
+}
+.eyebrow{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:25px;
+    color:var(--accent-light);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+}
+.eyebrow:before{width:34px;height:1px;background:var(--accent);content:""}
+.hero h1{
+    font-family:"Manrope",sans-serif;
+    font-size:clamp(60px,9vw,125px);
+    font-weight:800;
+    letter-spacing:-.075em;
+    line-height:.86;
+}
+.hero h1 span{
+    display:block;
+    color:transparent;
+    -webkit-text-stroke:1px rgba(242,238,230,.45);
+}
+.hero-text{
+    max-width:470px;
+    margin-top:32px;
+    color:var(--muted);
+    font-size:16px;
+}
+.actions{display:flex;gap:16px;margin-top:36px}
+.button{
+    display:inline-flex;
+    min-height:52px;
+    align-items:center;
+    justify-content:center;
+    padding:0 25px;
+    border:1px solid var(--accent);
+    background:var(--accent);
+    color:#15120e;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    transition:.25s;
+}
+.button:hover{background:transparent;color:var(--text);transform:translateY(-3px)}
+.button.alt{border-color:var(--line);background:transparent;color:var(--text)}
+.hero-art{
+    position:relative;
+    min-height:450px;
+    border:1px solid var(--line);
+    overflow:hidden;
+    background:
+        linear-gradient(145deg,rgba(201,163,106,.13),transparent 45%),
+        var(--surface);
+}
+.hero-art:before{
+    position:absolute;
+    width:320px;
+    height:320px;
+    top:-110px;
+    right:-80px;
+    border:1px solid rgba(201,163,106,.25);
+    border-radius:50%;
+    content:"";
+}
+.hero-art:after{
+    position:absolute;
+    width:190px;
+    height:190px;
+    right:12%;
+    bottom:12%;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:50%;
+    content:"";
+}
+.hero-art-content{position:absolute;right:32px;bottom:30px;left:32px}
+.hero-number{
+    color:var(--accent);
+    font-family:"Manrope",sans-serif;
+    font-size:100px;
+    font-weight:800;
+    line-height:.8;
+}
+.hero-label{
+    margin-top:20px;
+    color:#aaa79f;
+    font-size:11px;
+    letter-spacing:.16em;
+    line-height:1.7;
+    text-transform:uppercase;
+}
+
+/* Info */
+.info{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+.info-item{
+    min-height:115px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:20px 30px;
+    border-right:1px solid var(--line);
+}
+.info-item:first-child{padding-left:0}
+.info-item:last-child{border:0}
+.info-label{
+    margin-bottom:7px;
+    color:var(--muted);
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+}
+.info-value{font-family:"Manrope",sans-serif;font-size:16px;font-weight:700}
+
+/* Common */
+.section{padding:135px 0}
+.heading{
+    display:grid;
+    grid-template-columns:.65fr 1.35fr;
+    gap:45px;
+    margin-bottom:65px;
+}
+.number{color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.16em}
+.title{
+    font-family:"Manrope",sans-serif;
+    font-size:clamp(40px,5vw,70px);
+    font-weight:700;
+    letter-spacing:-.055em;
+    line-height:.98;
+}
+.title span{color:var(--muted)}
+
+/* About */
+.about{background:#151513}
+.about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px}
+.quote{
+    max-width:330px;
+    color:var(--accent-light);
+    font-family:"Manrope",sans-serif;
+    font-size:28px;
+    font-weight:700;
+    line-height:1.15;
+}
+.copy{max-width:650px;color:var(--muted);font-size:17px}
+.copy p+p{margin-top:20px}
+
+/* Services */
+.services-list{border-top:1px solid var(--line)}
+.service{
+    display:grid;
+    grid-template-columns:1fr 150px 110px;
+    gap:20px;
+    align-items:center;
+    min-height:90px;
+    border-bottom:1px solid var(--line);
+    transition:.25s;
+}
+.service:hover{padding:0 18px;background:rgba(255,255,255,.025)}
+.service-name{font-family:"Manrope",sans-serif;font-size:17px;font-weight:700}
+.service-time{color:var(--muted);font-size:12px}
+.service-price{color:var(--accent-light);font-family:"Manrope",sans-serif;font-weight:700;text-align:right}
+
+/* Barbers */
+.barbers{background:#151513}
+.barbers-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.barber{
+    position:relative;
+    min-height:420px;
+    display:flex;
+    align-items:flex-end;
+    padding:32px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:radial-gradient(circle at 70% 30%,rgba(201,163,106,.16),transparent 28%),#1a1917;
+}
+.barber:before{
+    position:absolute;
+    width:280px;
+    height:280px;
+    top:50%;
+    left:50%;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:50%;
+    content:"";
+    transform:translate(-50%,-50%);
+}
+.barber:after{
+    position:absolute;
+    width:180px;
+    height:180px;
+    top:50%;
+    left:50%;
+    border:1px solid rgba(201,163,106,.18);
+    border-radius:50%;
+    content:"";
+    transform:translate(-50%,-50%);
+}
+.barber-index{position:absolute;top:25px;right:25px;color:#66645f;font-size:11px;letter-spacing:.15em}
+.barber-info{position:relative;z-index:1}
+.role{
+    margin-bottom:6px;
+    color:var(--accent-light);
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+}
+.barber-name{
+    font-family:"Manrope",sans-serif;
+    font-size:clamp(30px,4vw,48px);
+    font-weight:800;
+    letter-spacing:-.04em;
+    text-transform:uppercase;
+}
+
+/* CTA */
+.cta{
+    position:relative;
+    overflow:hidden;
+    padding:150px 0;
+}
+.cta:before{
+    position:absolute;
+    width:700px;
+    height:700px;
+    top:50%;
+    left:50%;
+    border:1px solid rgba(201,163,106,.1);
+    border-radius:50%;
+    content:"";
+    transform:translate(-50%,-50%);
+}
+.cta-inner{position:relative;z-index:1;text-align:center}
+.cta-label{
+    margin-bottom:23px;
+    color:var(--accent);
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+}
+.cta h2{
+    max-width:850px;
+    margin:auto;
+    font-family:"Manrope",sans-serif;
+    font-size:clamp(48px,7vw,95px);
+    font-weight:800;
+    letter-spacing:-.07em;
+    line-height:.9;
+    text-transform:uppercase;
+}
+.cta h2 span{color:transparent;-webkit-text-stroke:1px rgba(242,238,230,.45)}
+.cta .button{margin-top:40px}
+
+/* Footer */
+.footer{border-top:1px solid var(--line);padding:45px 0 30px}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px}
+.footer-label{
+    margin-bottom:10px;
+    color:var(--muted);
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+}
+.footer-value{font-size:14px;line-height:1.7}
+.footer-value a:hover{color:var(--accent-light)}
+.bottom{
+    display:flex;
+    justify-content:space-between;
+    margin-top:55px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    color:#6e6c67;
+    font-size:11px;
+}
+
+/* Mobile */
+@media(max-width:850px){
+    .container{width:min(100% - 32px,700px)}
+    .header{padding:20px 0}
+    .nav{
+        position:absolute;
+        top:68px;
+        right:16px;
+        left:16px;
+        display:none;
+        flex-direction:column;
+        gap:18px;
+        padding:22px;
+        border:1px solid var(--line);
+        background:#11110f;
+    }
+    .nav.open{display:flex}
+    .phone{display:none}
+    .menu-button{display:block}
+    .hero{min-height:760px}
+    .hero-inner{grid-template-columns:1fr;gap:45px}
+    .hero-art{min-height:260px}
+    .info-grid{grid-template-columns:1fr}
+    .info-item,.info-item:first-child{
+        min-height:85px;
+        padding:18px 0;
+        border-right:0;
+        border-bottom:1px solid var(--line);
+    }
+    .info-item:last-child{border-bottom:0}
+    .section{padding:95px 0}
+    .heading{grid-template-columns:1fr;gap:18px;margin-bottom:45px}
+    .about-grid{grid-template-columns:1fr;gap:40px}
+    .service{grid-template-columns:1fr auto;gap:8px 20px;padding:20px 0}
+    .service:hover{padding:20px 10px}
+    .service-time{grid-column:1}
+    .service-price{grid-column:2;grid-row:1}
+    .barbers-grid{grid-template-columns:1fr}
+    .barber{min-height:350px}
+    .footer-grid{grid-template-columns:1fr;gap:26px}
+    .bottom{flex-direction:column;gap:8px}
+}
+@media(max-width:480px){
+    .hero h1{font-size:18vw}
+    .actions{flex-direction:column}
+    .button{width:100%}
+    .service-name{font-size:15px}
+}
+</style>
+</head>
+
+<body>
+<header class="header">
+    <div class="container header-inner">
+        <a class="logo" href="#top">GANZEL</a>
+
+        <nav class="nav" id="navigation">
+            <a href="#about">О барбершопе</a>
+            <a href="#services">Услуги</a>
+            <a href="#barbers">Барберы</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+
+        <a class="phone" href="tel:+79961220535">+7 (996) 122-05-35</a>
+
+        <button class="menu-button" type="button" aria-label="Меню" aria-expanded="false">☰</button>
+    </div>
+</header>
+
+<main id="top">
+    <section class="hero">
+        <div class="container hero-inner">
+            <div>
+                <div class="eyebrow">Barbershop · 41/03</div>
+
+                <h1>GANZEL <span>BARBER</span></h1>
+
+                <p class="hero-text">
+                    Стрижём, бреем, разговариваем.
+                    Мужское пространство для стрижек, бороды и ухода.
+                </p>
+
+                <div class="actions">
+                    <a class="button" href="tel:+79961220535">Записаться</a>
+                    <a class="button alt" href="#services">Услуги</a>
+                </div>
+            </div>
+
+            <div class="hero-art" aria-hidden="true">
+                <div class="hero-art-content">
+                    <div class="hero-number">01</div>
+                    <div class="hero-label">Ежедневно<br>10:00 — 20:00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info">
+        <div class="container info-grid">
+            <div class="info-item">
+                <div class="info-label">Режим работы</div>
+                <div class="info-value">Ежедневно · 10:00—20:00</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Адрес</div>
+                <div class="info-value">проспект Сююмбике, 17А</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Запись</div>
+                <div class="info-value"><a href="tel:+79961220535">+7 (996) 122-05-35</a></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="heading">
+                <div class="number">01 / GANZEL</div>
+                <h2 class="title">Стрижём. <span>Бреем.<br>Разговариваем.</span></h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="quote">Всё просто:<br>хороший барбер,<br>хороший результат.</div>
+
+                <div class="copy">
+                    <p>GANZEL BARBERSHOP — мужское пространство для стрижек, оформления бороды и ухода.</p>
+                    <p>Можно выбрать отдельную услугу или комплекс и записаться на удобное время.</p>
+                    <p>Работаем каждый день с 10:00 до 20:00.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="services">
+        <div class="container">
+            <div class="heading">
+                <div class="number">02 / SERVICES</div>
+                <h2 class="title">Услуги <span>и цены</span></h2>
+            </div>
+
+            <div class="services-list">
+                <div class="service"><div class="service-name">Стрижка</div><div class="service-time">1 час</div><div class="service-price">1 500 ₽</div></div>
+                <div class="service"><div class="service-name">Стрижка + борода</div><div class="service-time">1 ч 30 мин</div><div class="service-price">2 300 ₽</div></div>
+                <div class="service"><div class="service-name">Стрижка + камуфляж</div><div class="service-time">1 ч 30 мин</div><div class="service-price">2 000 ₽</div></div>
+                <div class="service"><div class="service-name">Стрижка + борода / камуфляж</div><div class="service-time">2 часа</div><div class="service-price">2 700 ₽</div></div>
+                <div class="service"><div class="service-name">Детская стрижка · 8—12 лет</div><div class="service-time">1 час</div><div class="service-price">1 300 ₽</div></div>
+                <div class="service"><div class="service-name">Камуфляж</div><div class="service-time">30 минут</div><div class="service-price">1 000 ₽</div></div>
+                <div class="service"><div class="service-name">Моделирование бороды и усов</div><div class="service-time">1 час</div><div class="service-price">от 1 100 ₽</div></div>
+                <div class="service"><div class="service-name">Окантовка</div><div class="service-time">1 час</div><div class="service-price">500 ₽</div></div>
+                <div class="service"><div class="service-name">Удаление волос воском</div><div class="service-time">15 минут</div><div class="service-price">300 ₽</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section barbers" id="barbers">
+        <div class="container">
+            <div class="heading">
+                <div class="number">03 / BARBERS</div>
+                <h2 class="title">Люди <span>за креслом.</span></h2>
+            </div>
+
+            <div class="barbers-grid">
+                <article class="barber">
+                    <div class="barber-index">01</div>
+                    <div class="barber-info">
+                        <div class="role">Старший барбер</div>
+                        <div class="barber-name">Аманов Бег</div>
+                    </div>
+                </article>
+
+                <article class="barber">
+                    <div class="barber-index">02</div>
+                    <div class="barber-info">
+                        <div class="role">Старший барбер</div>
+                        <div class="barber-name">Сердар</div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contacts">
+        <div class="container cta-inner">
+            <div class="cta-label">Запись на стрижку</div>
+            <h2>Время привести <span>себя в порядок.</span></h2>
+            <a class="button" href="tel:+79961220535">+7 (996) 122-05-35</a>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-label">GANZEL</div>
+                <div class="footer-value">Стрижём · бреем · разговариваем</div>
+            </div>
+            <div>
+                <div class="footer-label">Адрес</div>
+                <div class="footer-value">41/03<br>проспект Сююмбике, 17А</div>
+            </div>
+            <div>
+                <div class="footer-label">Контакты</div>
+                <div class="footer-value"><a href="tel:+79961220535">+7 (996) 122-05-35</a></div>
+            </div>
+        </div>
+
+        <div class="bottom">
+            <span>© 2026 GANZEL BARBERSHOP</span>
+            <span>Ежедневно · 10:00—20:00</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+const menuButton = document.querySelector(".menu-button");
+const navigation = document.querySelector("#navigation");
+
+menuButton.addEventListener("click", () => {
+    const isOpen = navigation.classList.toggle("open");
+
+    menuButton.setAttribute("aria-expanded", String(isOpen));
+    menuButton.textContent = isOpen ? "×" : "☰";
+});
+
+navigation.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+        navigation.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "☰";
+    });
+});
+</script>
+</body>
+</html>
